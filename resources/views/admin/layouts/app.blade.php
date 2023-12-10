@@ -14,7 +14,6 @@
         {{-- <link rel="stylesheet" href=""> --}}
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     </head>
     <body class="font-sans antialiased">
         <div class="flex flex-row min-h-screen bg-gray-100">
@@ -23,18 +22,21 @@
             <div class="w-64 bg-white">
                 @include('admin.layouts.sidebar')
             </div>
-
+            
             <div class="flex flex-col flex-1">
                 {{-- Header --}}
                 <header>
                     @include('admin.layouts.header')
                 </header>
-
+                
                 {{-- Main --}}
                 <main class="flex-1 justify-start overflow-hidden overflow-y-auto">
                     @yield('content')
                 </main>
             </div>
         </div>
+        <script src="{{ asset('js/dropdown.js') }}"></script>
+        <script src="{{ mix('resources/js/uploadImage.js') }}"></script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script> --}}
     </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AlutsistaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -28,9 +29,15 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-        Route::get('/senjata', function(){
-            return view('admin.senjata');
-        })->name('admin.senjata');
+        
+        Route::prefix('senjata')->group(function () {
+            Route::get('/', [AlutsistaController::class, 'index'])->name('admin.senjata');
+            Route::get('/tambah', [AlutsistaController::class, 'create'])->name('admin.senjata.tambah');
+            Route::post('/tambah', [AlutsistaController::class, 'store'])->name('admin.senjata.store');
+            Route::get('/{id}/edit', [AlutsistaController::class, 'edit'])->name('admin.senjata.edit');
+            Route::patch('/{id}/edit', [AlutsistaController::class, 'update'])->name('admin.senjata.update');
+            Route::delete('/{id}/delete', [AlutsistaController::class, 'destroy'])->name('admin.senjata.destroy');
+        });
 
         Route::get('/pengguna', function(){
             return view('admin.pengguna');

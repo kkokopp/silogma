@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'admin@example.com',
         //     'password' => 'admin123'
         // ]);
+        $this->call(JenisSenjataSeeder::class);
+        $this->call(StatusSenjataSeeder::class);
+        $this->call(SenjataSeeder::class);
     }
 }
