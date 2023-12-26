@@ -1,4 +1,8 @@
 @extends('admin.layouts.app')
+@if (session('success'))
+    <x-success-message/>
+@endif
+@section('header')
 @section('header')
 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
     {{ __('Dashboard') }}
@@ -21,9 +25,9 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-white uppercase bg-gradient-to-br from-slate-900 to-slate-600">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            {{-- <th scope="col" class="px-6 py-3">
                                 Kode Alusista
-                            </th>
+                            </th> --}}
                             <th scope="col" class="px-6 py-3">
                                 Foto
                             </th>
@@ -32,6 +36,9 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Jenis
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Jumlah
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Nomor Seri
@@ -47,17 +54,20 @@
                     <tbody>
                         @foreach ($alutsistas as $alutsista)                            
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{-- <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $alutsista->kode_senjata }}
-                                </th>
+                                </th> --}}
                                 <td class="px-6 py-4">
-                                    {{ $alutsista->foto }}
+                                    <img src="{{ asset('storage/'. $alutsista->foto) }}" alt="alutsista" class="w-40 ">
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $alutsista->nama_senjata }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $alutsista->jenis_senjata->nama_jenis_senjata }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $alutsista->jumlah }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $alutsista->seri_senjata }}
@@ -70,11 +80,11 @@
                                             </p>
                                         </div>
                                     </td>
-                                @elseif ($alutsista->status_senjata->nama_status_senjata == 'Tidak Aktif')
+                                @else
                                     <td class="px-6 py-4">
                                         <div class="bg-red-300 border-2 border-red-400 rounded-lg flex w-fit justify-center items-center font-bold text-red-600 py-2 px-5">
                                             <p>
-                                                Offline
+                                                {{ $alutsista->status_senjata->nama_status_senjata }}
                                             </p>
                                         </div>
                                     </td>
@@ -90,9 +100,17 @@
                                     <!-- Dropdown Menu -->
                                     <div class="origin-top-right right-0 absolute mt-2 w-44 -translate-x-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50 dropdown-menu">
                                         <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Lihat</a>
-                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Edit</a>
-                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Delete</a>
+                                            <a href="{{ route('alutsista.show', ['alutsista' => $alutsista->kode_senjata]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Lihat</a>
+                                            <a href="{{ route('admin.senjata.edit', ['alutsista' => $alutsista->kode_senjata]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Edit</a>
+                                            <form action="{{ route('admin.senjata.destroy', ['alutsista' => $alutsista->kode_senjata]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="cursor-pointer w-full block items-start justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" type="submit">
+                                                    <div class="flex items-start">
+                                                        <span>Delete</span>
+                                                    </div>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </td>
@@ -101,7 +119,9 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="py-5">
+                {{ $alutsistas->links() }}
+            </div>
             </div>
         </div>
     </div>

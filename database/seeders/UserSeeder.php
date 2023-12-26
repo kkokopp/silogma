@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
         //
         $admin = User::factory()->create([
             'name' => 'admin',
+            'kode_user' => 'U-001',
             'email' => 'admin@gmail.com',
             'password' => 'admin123'
         ]);
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
 
         $user = User::factory()->create([
             'name' => 'user',
+            'kode_user' => 'U-002',
             'email' => 'user@gmail.com',
             'password' => 'user1234'
         ]);

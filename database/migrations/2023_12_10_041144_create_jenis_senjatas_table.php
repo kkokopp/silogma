@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jenis_senjatas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_jenis_senjata');
+            $table->string('slug')->unique();
             // $table->foreignId('senjata_id')->constrained('senjatas');
             $table->timestamps();
         });

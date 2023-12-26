@@ -19,5 +19,10 @@ class Senjata extends Model
         return $this->belongsTo(StatusSenjata::class);
     }
 
+    public function riwayat()
+    {
+        return $this->hasMany(Riwayat::class);
+    }
+
     use HasFactory;
 }

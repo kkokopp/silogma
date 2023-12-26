@@ -1,6 +1,8 @@
-<aside class="relative flex flex-col h-full rounded-xl text-gray-700 p-5 items-center">
+<aside class="fixed flex flex-col h-full rounded-xl text-gray-700 p-5 items-center w-64">
     <div class="flex pt-5 ">
-        <h1 class="uppercase text-2xl font-extrabold">Silogma</h1>
+        <h1 class="uppercase text-2xl font-extrabold">
+            <img src="{{ asset('images/logo_black.svg') }}" alt="logo" class="w-28">
+        </h1>
     </div>
     <div class="flex flex-col w-full pt-5">
         <ul class="list-none">
@@ -18,7 +20,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                     </svg>
-                    <span class="ml-3 whitespace-nowrap opacity-transition">Inventaris</span>
+                    <span class="ml-3 whitespace-nowrap opacity-transition">Inventori</span>
                 </a>
             </li>
             <li class="py-1">

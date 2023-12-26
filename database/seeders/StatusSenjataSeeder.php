@@ -17,7 +17,10 @@ class StatusSenjataSeeder extends Seeder
             'nama_status_senjata' => 'Aktif',
         ]);
         \App\Models\StatusSenjata::create([
-            'nama_status_senjata' => 'Tidak Aktif',
+            'nama_status_senjata' => 'Perbaikan',
+        ]);
+        \App\Models\StatusSenjata::create([
+            'nama_status_senjata' => 'Penyimpanan',
         ]);
     }
 }

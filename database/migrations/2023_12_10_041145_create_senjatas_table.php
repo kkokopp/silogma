@@ -16,12 +16,17 @@ return new class extends Migration
             $table->string('kode_senjata')->unique();
             $table->string('nama_senjata');
             $table->string('seri_senjata');
+            $table->string('lokasi');
+            $table->integer('jumlah');
             $table->string('foto')->nullable();
             $table->unsignedBigInteger('status_senjata_id');
             $table->unsignedBigInteger('jenis_senjata_id');
+            $table->text('keterangan');
+            // $table->unsignedBigInteger('riwayat_id');
             $table->timestamps();
             $table->foreign('jenis_senjata_id')->references('id')->on('jenis_senjatas');
             $table->foreign('status_senjata_id')->references('id')->on('status_senjatas');
+            // $table->foreign('riwayat_id')->references('id')->on('riwayats');
         });
     }
 

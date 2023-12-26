@@ -14,13 +14,28 @@ class JenisSenjataSeeder extends Seeder
     {
         //
         \App\Models\JenisSenjata::create([
-            'nama_jenis_senjata' => 'Tank',
+            'nama_jenis_senjata' => 'Senjata Sniper',
+            'slug' => 'senjata-sniper',
         ]);
         \App\Models\JenisSenjata::create([
-            'nama_jenis_senjata' => 'Pesawat',
+            'nama_jenis_senjata' => 'Pesawat Angkut',
+            'slug' => 'pesawat-angkut',
         ]);
         \App\Models\JenisSenjata::create([
-            'nama_jenis_senjata' => 'Mechine Gun',
+            'nama_jenis_senjata' => 'Kapal Perang',
+            'slug' => 'kapal-perang',
+        ]);
+        \App\Models\JenisSenjata::create([
+            'nama_jenis_senjata' => 'Pesawat Tempur',
+            'slug' => 'pesawat-tempur',
+        ]);
+        \App\Models\JenisSenjata::create([
+            'nama_jenis_senjata' => 'Submachine Gun',
+            'slug' => 'submachine-gun',
+        ]);
+        \App\Models\JenisSenjata::create([
+            'nama_jenis_senjata' => 'Ranpur dan Rantis',
+            'slug' => 'ranpur-dan-rantis',
         ]);
     }
 }
