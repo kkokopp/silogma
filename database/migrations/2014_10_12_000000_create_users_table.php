@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('kode_user')->unique();
             $table->string('name');
+            $table->string('nomor_induk')->unique();
             $table->string('email')->unique();
+            $table->string('nomor_tlp')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

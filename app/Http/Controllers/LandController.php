@@ -19,9 +19,14 @@ class LandController extends Controller
 
     public function show (Senjata $alutsista){
         $alutsista_last = Senjata::latest()->take(6)->get();
+        $jenis = $alutsista->jenis_senjata->nama_jenis_senjata;
+        $alutsista_sejenis = Senjata::whereHas('jenis_senjata', function ($subquery) use ($jenis) {
+            $subquery->where('nama_jenis_senjata', $jenis);
+        })->where('id', '!=', $alutsista->id)->get();
         return view('guest.show',[
             'alutsista' => $alutsista,
             'alutsistas_last' => $alutsista_last,
+            'alutsistas_sejenis' => $alutsista_sejenis,
         ])
         ->with('layout', 'guest.layouts.app');
     }

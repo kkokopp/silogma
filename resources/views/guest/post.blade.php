@@ -1,4 +1,14 @@
 @extends('guest.layouts.app')
+<?php
+    $jenis_gambar = [
+        'sniper.jpg',
+        'angkut.jpg',
+        'kapal_perang.jpg',
+        'pesawat_tempur.jpg',
+        'submachine_gun.jpg',
+        'tankk.jpg',
+    ];
+?>
 @section('content')
 <div class="h-full">
         <div class="bg-gray-200 dark:bg-gray-800 overflow-hidden ">
@@ -22,7 +32,9 @@
                                             <div class="shadow-md rounded-md w-full border-slate-400 border-2">
                                                 <div>
                                                     @if ($alutsista->foto == null)
-                                                        <img src="{{ asset('images/beranda.jpg') }}" alt="beranda" class="object-cover object-top w-full rounded-t-md h-48">
+                                                        @if ($alutsista->jenis_senjata->id >= 1 && $alutsista->jenis_senjata->id <= 6)
+                                                            <img src="{{ asset('images/' . $jenis_gambar[$alutsista->jenis_senjata->id - 1]) }}" alt="beranda" class="object-cover object-top w-full rounded-t-md h-48">
+                                                        @endif
                                                     @else
                                                         <img src="{{ asset('storage/'. $alutsista->foto) }}" alt="beranda" class="object-cover object-top w-full rounded-t-md h-48">
                                                     @endif
@@ -66,7 +78,9 @@
                                             <div class="rounded-md w-80 border-slate-400 h-42 flex">
                                                 <div>
                                                     @if ($alutsistas->foto == null)
-                                                        <img src="{{ asset('images/beranda.jpg') }}" alt="beranda" class="object-cover object-top rounded-l-md w-36  h-28">
+                                                        @if ($alutsistas->jenis_senjata->id >= 1 && $alutsistas->jenis_senjata->id <= 6)
+                                                            <img src="{{ asset('images/' . $jenis_gambar[$alutsistas->jenis_senjata->id - 1]) }}" alt="beranda" class="object-cover object-top w-36 rounded-t-md h-28">
+                                                        @endif
                                                     @else
                                                         <img src="{{ asset('storage/'. $alutsistas->foto) }}" alt="beranda" class="object-cover object-top rounded-l-md w-36 h-28">
                                                     @endif

@@ -10,18 +10,18 @@
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 w-full">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg gap-4 flex flex-col justify-between p-5 border-l-8 border-slate-800">
                 <div class="text-slate-900 font-bold text-4xl">
-                    <p>{{ $senjata->count() }}</p>
-                </div>
-                <div class=" text-xl font-semibold">
-                    Jumlah Senjata
-                </div>
-            </div>
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg gap-4 flex flex-col justify-between p-5 border-l-8 border-slate-800">
-                <div class="text-slate-900 font-bold text-4xl">
                     <p>{{ $user }}</p>
                 </div>
                 <div class=" text-xl font-semibold">
                     Jumlah Pengguna
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg gap-4 flex flex-col justify-between p-5 border-l-8 border-slate-800">
+                <div class="text-slate-900 font-bold text-4xl">
+                    <p>{{ $senjata->count() }}</p>
+                </div>
+                <div class=" text-xl font-semibold">
+                    Jumlah Alutsista
                 </div>
             </div>
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg gap-4 flex flex-col justify-between p-5 border-l-8 border-slate-800">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="w-1/2">
                     <div class="bg-white shadow-md rounded-md p-5 w-full h-96">
-                        <canvas id="myChart3" style="width:100%;max-width:600px;height:100%;max-height:500px"></canvas>
+                        <canvas id="myChart3" style="width:100%;max-width:800px;height:100%;max-height:600px"></canvas>
                     </div>
                 </div>
             </div>

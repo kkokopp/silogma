@@ -28,9 +28,10 @@
                 <div class="absolute bottom-0 left-0 w-0 h-[0.20rem] bg-white origin-center transform scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100 group-hover:w-full"></div>
             </li>
             <li class="relative group py-5 px-3 hover:text-white">
-                <a href="/#etalase" class="{{ request()->url() === url('/#etalase') ? 'text-white':'' }}">Etalase</a>
+                <a href="{{ route('alutsista.index').'#etalase' }}" class="{{ Str::contains(request()->url(), '/#etalase') ? 'text-white' : '' }}">Etalase</a>
                 <div class="absolute bottom-0 left-0 w-0 h-[0.20rem] bg-white origin-center transform scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100 group-hover:w-full"></div>
             </li>
+            {{-- {{ dd(request()->url()) }} --}}
             <li class="relative group py-5 px-3 hover:text-white">
                 @if(Auth::check())
                     <a href="{{ route('admin.dashboard') }}" class="bg-white py-2 px-2 rounded-md text-black hover:text-white hover:bg-slate-500">Dashboard</a>

@@ -1,4 +1,14 @@
 @extends('guest.layouts.app')
+<?php
+    $jenis_gambar = [
+        'sniper.jpg',
+        'angkut.jpg',
+        'kapal_perang.jpg',
+        'pesawat_tempur.jpg',
+        'submachine_gun.jpg',
+        'tankk.jpg',
+    ];
+?>
 @section('content')
 <div class=" min-h-screen">
         <div class="bg-white dark:bg-gray-800 overflow-hidden">
@@ -25,20 +35,27 @@
                         </div>
                         <div class="pt-3 pb-8">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-                                @foreach ($alutsistas as $alutsista)                                    
-                                    <div class="shadow-md rounded-md max-w-3xl w-full border-slate-400 border-2 h-80">
-                                        <div>
+                                @foreach ($alutsistas as $alutsista)                                
+                                    <div class="shadow-md hover:shadow-lg rounded-md max-w-3xl w-full border-slate-400 border-2 h-[22rem] group hover:-translate-y-1 hover:scale-105 transition-transform duration-300">
+                                        <div class=" overflow-hidden">
+                                            {{-- {{ dd($alutsista->jenis_senjata->id) }} --}}
                                             @if ($alutsista->foto == null)
-                                                <img src="{{ asset('images/beranda.jpg') }}" alt="beranda" class="object-cover object-top w-full rounded-t-md">
+                                                @if ($alutsista->jenis_senjata->id >= 1 && $alutsista->jenis_senjata->id <= 6)
+                                                    <img src="{{ asset('images/' . $jenis_gambar[$alutsista->jenis_senjata->id - 1]) }}" alt="beranda" class="object-cover object-top w-96 rounded-t-md h-52 group-hover:scale-105 transition-transform duration-300">
+                                                @endif
                                             @else
-                                                <img src="{{ asset('storage/'. $alutsista->foto) }}" alt="beranda" class="object-cover object-top w-full rounded-t-md h-52">
+                                                <img src="{{ asset('storage/'. $alutsista->foto) }}" alt="beranda" class="object-cover object-top w-96 rounded-t-md h-52">
                                             @endif
                                         </div>
                                         <div class="p-3 font-bold overflow-hidden">
                                             <div class="line-clamp-2 max-h-30 h-full">
                                                 <p>{{ $alutsista->nama_senjata }}</p>
                                             </div>
-                                            <div class="pt-5 w-full items-end flex justify-end hover">
+                                            <div class=" text-xs line-clamp-2 w-full font-normal">
+                                                <p >{!!$alutsista->keterangan!!}</p>
+                                            </div>
+                                            <div class="pt-5 w-full flex justify-between items-center hover">
+                                                <p>{{ date('d/m/Y', strtotime($alutsista->created_at)) }}</p>
                                                 <a href="{{ route('alutsista.show', ['alutsista' => $alutsista->kode_senjata]) }}" class="bg-slate-900 py-2 px-3 rounded-md text-white">Selengkapnya</a>
                                             </div>
                                         </div>
@@ -61,11 +78,14 @@
                         </div>
                         <div class="py-8">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-                                @foreach ($jeniss as $jenis)                                    
-                                    <div class="shadow-md rounded-md max-w-6xl w-full border-slate-400 border-2">
-                                        <div class="relative group overflow-hidden">
-                                            <img src="{{ asset('images/beranda.jpg') }}" alt="beranda" class="object-cover object-top w-full rounded-t-md transition-transform duration-300 transform group-hover:scale-105">
-                                            <div class="absolute top-0 z-40 text-white font-semibold text-3xl bg-gray-800/20 hover:bg-gray-800/50 w-full h-full flex items-center justify-center">
+                                @foreach ($jeniss as $jenis)
+                                    <div class="rounded-md max-w-6xl w-full">
+                                        <div class="relative group overflow-hidden h-52 rounded-md shadow-md">
+                                            {{-- {{ $loop->index+1 }} --}}
+                                            @if($jenis->id == $loop->index+1)
+                                                <img src="{{ asset('images/'. $jenis_gambar[$loop->index]) }}" alt="beranda" class=" object-cover object-top w-full rounded-md transition-transform duration-300 transform group-hover:scale-105">
+                                            @endif
+                                            <div class="absolute top-0 z-40 text-white font-semibold text-3xl bg-gray-800/20 hover:bg-slate-800/50 w-full h-full flex items-center justify-center">
                                                 <a href="alutsista/semua?kategori={{ $jenis->slug }}" class="">{{ $jenis->nama_jenis_senjata }}</a>
                                             </div>
                                         </div>

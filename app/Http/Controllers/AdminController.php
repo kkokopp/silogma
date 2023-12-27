@@ -67,13 +67,13 @@ class AdminController extends Controller
         ])->with('layout', 'admin.layouts.app');
     }
 
-    public function pengguna()
-    {   
-        // $users = User::with('roles')->get();
-        // $users = $users->hasRole();
-        // dd($users);
-        return view('admin.pengguna', [
-            'users' => User::with('roles')->get()
-        ]);
-    }
+    // public function pengguna()
+    // {   
+    //     // $users = User::with('roles')->get();
+    //     // $users = $users->hasRole();
+    //     // dd($users);
+    //     return view('admin.pengguna.pengguna', [
+    //         'users' => User::with('roles')->get()
+    //     ]);
+    // }
 }

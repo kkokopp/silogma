@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlutsistaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,12 +39,12 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{alutsista:kode_senjata}/delete', [AlutsistaController::class, 'destroy'])->name('admin.senjata.destroy');
         });
         Route::prefix('pengguna')->group(function () {
-            Route::get('/', [AdminController::class, 'pengguna'])->name('admin.pengguna');
-            Route::get('/tambah', [AdminController::class, 'create'])->name('admin.pengguna.tambah');
-            Route::post('/tambah', [AdminController::class, 'store'])->name('admin.pengguna.store');
-            Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('admin.pengguna.edit');
-            Route::patch('/{id}/edit', [AdminController::class, 'update'])->name('admin.pengguna.update');
-            Route::delete('/{id}/delete', [AdminController::class, 'destroy'])->name('admin.pengguna.destroy');
+            Route::get('/', [PenggunaController::class, 'index'])->name('admin.pengguna');
+            Route::get('/tambah', [PenggunaController::class, 'create'])->name('admin.pengguna.tambah');
+            Route::post('/tambah', [PenggunaController::class, 'store'])->name('admin.pengguna.store');
+            Route::get('/{user:kode_user}/edit', [PenggunaController::class, 'edit'])->name('admin.pengguna.edit');
+            Route::patch('/{user:kode_user}/edit', [PenggunaController::class, 'update'])->name('admin.pengguna.update');
+            Route::delete('/{user:kode_user}/delete', [PenggunaController::class, 'destroy'])->name('admin.pengguna.destroy');
 
         });
     });

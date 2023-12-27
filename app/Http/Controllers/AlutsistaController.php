@@ -11,6 +11,7 @@ use App\Models\JenisSenjata;
 use Illuminate\Http\Request;
 use App\Models\StatusSenjata;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class AlutsistaController extends Controller
 {
@@ -197,6 +198,10 @@ class AlutsistaController extends Controller
             }
             session()->flash('success', 'Berhasil menyimpan perubahan!');
             return redirect()->route('admin.senjata.edit', ['alutsista' => $alutsista->kode_senjata]);
+        }catch(ValidationException $e){
+            // dd($e->getMessage());
+            session()->flash('error', 'Terjadi kesalahan saat menyimpan data');
+            return redirect()->route('admin.senjata.edit', ['alutsista' => $alutsista->kode_senjata])->withErrors($e->validator)->withInput();
         }
         catch(\Exception $e){
             dd($e);
@@ -212,7 +217,7 @@ class AlutsistaController extends Controller
             session()->flash('success', 'Data berhasil dihapus');
             return redirect()->route('admin.senjata');
         }catch(\Exception $e){
-            dd($e);
+            // dd($e);
             session()->flash('error', 'Terjadi kesalahan saat menghapus data');
             return redirect()->route('admin.senjata');
         }
