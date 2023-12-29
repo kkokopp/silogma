@@ -24,7 +24,7 @@
                 <div class="absolute bottom-0 left-0 w-0 h-[0.20rem] bg-white origin-center transform scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100 group-hover:w-full"></div>
             </li>
             <li class="relative group py-5 px-3 hover:text-white">
-                <a href="{{ route('alutsista.semua') }}" class="{{ request()->is('alutsista/semua') ? 'text-white':'' }}">Post</a>
+                <a href="{{ route('alutsista.semua') }}" class="{{ Str::contains(request()->url(), 'alutsista/post') ?  'text-white':'' }}">Post</a>
                 <div class="absolute bottom-0 left-0 w-0 h-[0.20rem] bg-white origin-center transform scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100 group-hover:w-full"></div>
             </li>
             <li class="relative group py-5 px-3 hover:text-white">

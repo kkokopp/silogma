@@ -51,7 +51,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($alutsistas as $alutsista)                            
+                        @foreach ($alutsistas as $index => $alutsista)                            
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                 {{-- <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $alutsista->kode_senjata }}
@@ -101,22 +101,19 @@
                                         <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                             <a href="{{ route('alutsista.show', ['alutsista' => $alutsista->kode_senjata]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Lihat</a>
                                             <a href="{{ route('admin.senjata.edit', ['alutsista' => $alutsista->kode_senjata]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Edit</a>
-                                            <form action="{{ route('admin.senjata.destroy', ['alutsista' => $alutsista->kode_senjata]) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="cursor-pointer w-full block items-start justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" type="submit">
-                                                    <div class="flex items-start">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </button>
-                                            </form>
+                                            <button class="modalbtn cursor-pointer w-full block items-start justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" type="button" data-id="{{ $index }}">
+                                                <div class="flex items-start">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </button>
                                         </div>
                                     </div>
+                                    <x-modal-confirmation :kode="$alutsista->kode_senjata" title=Alutsista route=admin.senjata.destroy model=alutsista :iteration="$index"/>
                                 </td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            @endforeach
+                        </tbody>
+                    </table>
             </div>
             <div class="py-5">
                 {{ $alutsistas->links() }}
@@ -125,5 +122,27 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modalBtns = document.querySelectorAll('.modalbtn');
 
+        modalBtns.forEach(function(modalBtn) {
+            modalBtn.addEventListener("click", function() {
+                // Dapatkan data-id dari tombol untuk menemukan modal yang sesuai
+                var modalId = modalBtn.getAttribute('data-id');
+                
+                // Bangun selector modal berdasarkan data-id
+                var modalSelector = "#modal-confirmation-" + modalId;
+                
+                // Temukan modal menggunakan selector yang baru dibangun
+                var modal = document.querySelector(modalSelector);
+                
+                // Periksa apakah modal ditemukan sebelum menampilkan atau menyembunyikan
+                if (modal) {
+                    modal.toggleAttribute("hidden");
+                }
+            });
+        });
+    });
+</script>
 @endsection

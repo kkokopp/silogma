@@ -50,6 +50,7 @@ class PenggunaController extends Controller
             ]);
 
             $pengguna->assignRole($data['roles']);
+            $pengguna->notify(new \App\Notifications\SendPasswordNotification($password));
     
             return redirect()->route('admin.pengguna')->with('success', 'Pengguna berhasil ditambahkan');
 

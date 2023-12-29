@@ -45,7 +45,7 @@
                                                         <p class="font-normal">{!! $alutsista->keterangan !!}</p>
                                                     </div>
                                                     <div class=" text-xs font-normal">
-                                                        <a href="semua?kategori={{ $alutsista->jenis_senjata->slug }}" class="hover:text-blue-700 underline">{{ $alutsista->jenis_senjata->nama_jenis_senjata }}</a>
+                                                        <a href="post?kategori={{ $alutsista->jenis_senjata->slug }}" class="hover:text-blue-700 underline">{{ $alutsista->jenis_senjata->nama_jenis_senjata }}</a>
                                                     </div>
                                                     <div class=" font-bold w-full items-end flex justify-between hover">
                                                         <p>{{ date('d/m/Y', strtotime($alutsista->created_at)) }}</p>
@@ -76,7 +76,7 @@
                                 <div class="flex flex-col gap-5">
                                         @foreach ($alutsistas_last as $alutsistas)                                    
                                             <div class="rounded-md w-80 border-slate-400 h-42 flex">
-                                                <div>
+                                                <div class="w-1/2">
                                                     @if ($alutsistas->foto == null)
                                                         @if ($alutsistas->jenis_senjata->id >= 1 && $alutsistas->jenis_senjata->id <= 6)
                                                             <img src="{{ asset('images/' . $jenis_gambar[$alutsistas->jenis_senjata->id - 1]) }}" alt="beranda" class="object-cover object-top w-36 rounded-t-md h-28">
@@ -85,12 +85,12 @@
                                                         <img src="{{ asset('storage/'. $alutsistas->foto) }}" alt="beranda" class="object-cover object-top rounded-l-md w-36 h-28">
                                                     @endif
                                                 </div>
-                                                <div class="p-2 font-bold overflow-hidden flex flex-col">
+                                                <div class="font-bold overflow-hidden flex flex-col w-1/2">
                                                     <div class="line-clamp-2 text-xs">
                                                         <p>{{ $alutsistas->nama_senjata }}</p>
                                                     </div>
                                                     <div class=" text-xs line-clamp-2 w-40 font-normal">
-                                                        <p >{{ htmlspecialchars($alutsistas->keterangan) }}</p>
+                                                        <p >{!!$alutsistas->keterangan!!}</p>
                                                     </div>
                                                     <div class="py-2 w-full items-end flex justify-end hover">
                                                         <a href="{{ route('alutsista.show', ['alutsista' => $alutsistas->kode_senjata]) }}" class="bg-slate-900 py-1 px-2 rounded-md text-white text-xs">Selengkapnya</a>

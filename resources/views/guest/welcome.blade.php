@@ -36,7 +36,7 @@
                         <div class="pt-3 pb-8">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
                                 @foreach ($alutsistas as $alutsista)                                
-                                    <div class="shadow-md hover:shadow-lg rounded-md max-w-3xl w-full border-slate-400 border-2 h-[22rem] group hover:-translate-y-1 hover:scale-105 transition-transform duration-300">
+                                    <div class="shadow-md hover:shadow-lg rounded-md max-w-3xl w-full border-slate-400 border-2 h-[24rem] group hover:-translate-y-1 hover:scale-105 transition-transform duration-300 flex flex-col">
                                         <div class=" overflow-hidden">
                                             {{-- {{ dd($alutsista->jenis_senjata->id) }} --}}
                                             @if ($alutsista->foto == null)
@@ -44,11 +44,11 @@
                                                     <img src="{{ asset('images/' . $jenis_gambar[$alutsista->jenis_senjata->id - 1]) }}" alt="beranda" class="object-cover object-top w-96 rounded-t-md h-52 group-hover:scale-105 transition-transform duration-300">
                                                 @endif
                                             @else
-                                                <img src="{{ asset('storage/'. $alutsista->foto) }}" alt="beranda" class="object-cover object-top w-96 rounded-t-md h-52">
+                                                <img src="{{ asset('storage/'. $alutsista->foto) }}" alt="beranda" class="object-cover object-top w-96 rounded-t-md h-52 group-hover:scale-105 transition-transform duration-300">
                                             @endif
                                         </div>
-                                        <div class="p-3 font-bold overflow-hidden">
-                                            <div class="line-clamp-2 max-h-30 h-full">
+                                        <div class="p-3 font-bold overflow-hidden flex flex-col h-[11rem] justify-between">
+                                            <div class="line-clamp-2 max-h-full">
                                                 <p>{{ $alutsista->nama_senjata }}</p>
                                             </div>
                                             <div class=" text-xs line-clamp-2 w-full font-normal">
@@ -95,6 +95,47 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+        <div class="flex w-full justify-center items-center bg-gradient-to-tr from-slate-900 to-slate-500 py-5">
+            <div class="max-w-6xl w-full p-5 flex gap-4 bg-gray-200/50 opacity-95 backdrop-blur-sm backdrop-brightness-150 shadow-lg  rounded-md border-2 border-gray-600">
+                <div class="flex flex-col">
+                    <div class="text-3xl flex justify-center items-center w-full font-semibold pt-5 ">
+                        <h4>Contact Us</h4>
+                    </div>
+                    <div class="flex">
+                        <div class="w-1/2 flex flex-col px-5">
+                            <form action="{{ route('send.email') }}" method="POST">
+                                @csrf
+                                <div class="py-5">
+                                    <x-input-label for="nama" :value="__('Nama')" />
+                                    <x-text-input id="nama" class="block mt-1 w-full" type="text" name="nama" :value="( old('nama'))" required autofocus autocomplete="nama" />
+                                    <x-input-error :messages="$errors->get('nama')" class="mt-2" />
+                                </div class="py-5">
+                                <div>
+                                    <x-input-label for="email_pengguna" :value="__('Email')"/>
+                                    <x-text-input id="email_pengguna" class="block mt-1 w-full" type="text" name="email_pengguna" :value="( old('email_pengguna'))" required autofocus autocomplete="email_pengguna" />
+                                    <x-input-error :messages="$errors->get('email_pengguna')" class="mt-2" />
+                                </div>
+                                <div class="py-5">
+                                    <x-input-label for="pesan" :value="__('Pesan')"/>
+                                    <textarea name="pesan" id="pesan" cols="30" rows="10" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-gray-500 dark:focus:border-gray-600 focus:ring-gray-500 dark:focus:ring-dark-600 rounded-md shadow-sm w-full block mt-1" type="text" name="pesan" :value="( old('pesan'))" required autofocus autocomplete="pesan"></textarea>
+                                    <x-input-error :messages="$errors->get('pesan')" class="mt-2" />
+                                </div>
+                                <div class="flex w-full justify-end items-end">
+                                    <x-primary-button>
+                                        {{ _('Submit') }}
+                                    </x-primary-button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="w-full flex justify-center items-center">
+                                <img src="{{ asset('images/customer_service.png') }}" alt="" class=" object-cover w-full h-full">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

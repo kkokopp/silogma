@@ -25,7 +25,7 @@
                                         <p>{{ date('d/m/Y', strtotime($alutsista->created_at)) }}</p>
                                     </div>
                                     <div class="border-r-2 border-black pr-6">
-                                        <a href="semua?kategori={{ $alutsista->jenis_senjata->slug }}" class="hover:text-blue-700 underline">{{ $alutsista->jenis_senjata->nama_jenis_senjata }}</a>
+                                        <a href="/alutsista/post?kategori={{ $alutsista->jenis_senjata->slug }}" class="hover:text-blue-700 underline">{{ $alutsista->jenis_senjata->nama_jenis_senjata }}</a>
                                     </div>
                                     <div class="border-r-2 border-black pr-6">
                                         <p>{{ $alutsista->status_senjata->nama_status_senjata }}</p>
@@ -74,7 +74,7 @@
                                                         <p>{{ $alutsistas->nama_senjata }}</p>
                                                     </div>
                                                     <div class=" text-xs line-clamp-2 w-40 font-normal">
-                                                        <p >{{ htmlspecialchars($alutsistas->keterangan) }}</p>
+                                                        <p >{!!$alutsistas->keterangan!!}</p>
                                                     </div>
                                                     <div class="py-2 w-full items-end flex justify-end hover">
                                                         <a href="{{ route('alutsista.show', ['alutsista' => $alutsistas->kode_senjata]) }}" class="bg-slate-900 py-1 px-2 rounded-md text-white text-xs">Selengkapnya</a>
@@ -104,7 +104,7 @@
                                 @else
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
                                         @foreach ($alutsistas_last as $alutsistas)                                    
-                                            <div class="rounded-md border-slate-400 h-42 border-2 group hover:-translate-x-1 hover:-translate-y-1 transition-transform duration-300 hover:scale-105 hover:shadow-md">
+                                            <div class="rounded-md border-slate-400 h-42 border-2 group hover:-translate-x-1 hover:-translate-y-1 transition-transform duration-300 hover:scale-105 hover:shadow-md flex flex-col">
                                                 <div class="overflow-hidden">
                                                     @if ($alutsistas->foto == null)
                                                         @if ($alutsistas->jenis_senjata->id >= 1 && $alutsistas->jenis_senjata->id <= 6)
@@ -114,12 +114,12 @@
                                                         <img src="{{ asset('storage/'. $alutsistas->foto) }}" alt="beranda" class="object-cover object-top rounded-t-md w-full h-28">
                                                     @endif
                                                 </div>
-                                                <div class="p-2 font-bold overflow-hidden flex flex-col">
-                                                    <div class="line-clamp-2 text-xs">
+                                                <div class="py-2 px-1 font-bold overflow-hidden flex flex-col justify-between h-32">
+                                                    <div class="line-clamp-2 text-xs w-full">
                                                         <p>{{ $alutsistas->nama_senjata }}</p>
                                                     </div>
-                                                    <div class=" text-xs line-clamp-2 w-40 font-normal">
-                                                        <p >{{ htmlspecialchars($alutsistas->keterangan) }}</p>
+                                                    <div class=" text-xs line-clamp-2 w-full font-normal">
+                                                        <p >{!!$alutsistas->keterangan!!}</p>
                                                     </div>
                                                     <div class="py-2 w-full items-end flex justify-end hover">
                                                         <a href="{{ route('alutsista.show', ['alutsista' => $alutsistas->kode_senjata]) }}" class="bg-slate-900 py-1 px-2 rounded-md text-white text-xs">Selengkapnya</a>

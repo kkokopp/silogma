@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)                                
+                            @foreach ($users as $index => $user)                                
                                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $user->email }}
@@ -64,12 +64,13 @@
                                     <td class="px-6 flex gap-2 py-4">
                                         {{-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
                                         <a href="{{ route('admin.pengguna.edit', ['user' => $user->kode_user]) }}" class="font-semibold bg-blue-400 text-white border-blue-600 px-2 py-1 border-2 rounded-lg hover:bg-blue-600">Edit</a>
-                                        <form action="{{ route('admin.pengguna.destroy', ['user' => $user->kode_user]) }}" method="POST">
+                                        {{-- <form action="{{ route('admin.pengguna.destroy', ['user' => $user->kode_user]) }}" method="POST"> --}}
                                             {{-- {{ dd($user->kode_user) }} --}}
-                                            @csrf     
-                                            @method('DELETE')                                       
-                                            <button type="submit" class="font-semibold bg-red-400 text-white border-red-600 px-2 py-1 border-2 rounded-lg hover:bg-red-600">Delete</button>
-                                        </form>
+                                            {{-- @csrf     
+                                            @method('DELETE')                                        --}}
+                                        <button type="button" data-id="{{ $index }}" class="modalbtn font-semibold bg-red-400 text-white border-red-600 px-2 py-1 border-2 rounded-lg hover:bg-red-600">Delete</button>
+                                        {{-- </form> --}}
+                                        <x-modal-confirmation :kode="$user->kode_user" title=Pengguna route=admin.pengguna.destroy model=user :iteration="$index"/>
                                     </td>
                                 </tr>
                             @endforeach
@@ -80,4 +81,27 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modalBtns = document.querySelectorAll('.modalbtn');
+
+        modalBtns.forEach(function(modalBtn) {
+            modalBtn.addEventListener("click", function() {
+                // Dapatkan data-id dari tombol untuk menemukan modal yang sesuai
+                var modalId = modalBtn.getAttribute('data-id');
+                
+                // Bangun selector modal berdasarkan data-id
+                var modalSelector = "#modal-confirmation-" + modalId;
+                
+                // Temukan modal menggunakan selector yang baru dibangun
+                var modal = document.querySelector(modalSelector);
+                
+                // Periksa apakah modal ditemukan sebelum menampilkan atau menyembunyikan
+                if (modal) {
+                    modal.toggleAttribute("hidden");
+                }
+            });
+        });
+    });
+</script>
 @endsection

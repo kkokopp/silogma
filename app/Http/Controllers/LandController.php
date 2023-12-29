@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JenisSenjata;
+use App\Mail\SendEmail;
 use App\Models\Senjata;
+use App\Models\JenisSenjata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LandController extends Controller
 {
@@ -61,6 +63,18 @@ class LandController extends Controller
             // 'jenis' => $jenis,
         ])
         ->with('layout', 'guest.layouts.app');
+    }
+
+    public function sendEmail(Request $request){
+        $nama = $request->nama;
+        $email_pengguna = $request->email_pengguna;
+        $pesan = $request->pesan;
+
+        $email = new SendEmail($nama, $email_pengguna, $pesan);
+
+        Mail::to('silogmamiliter@gmail.com')->send($email);
+        
+        return redirect()->back()->with('success', 'Email Berhasil Dikirim');
     }
 
 }

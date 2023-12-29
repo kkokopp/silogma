@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AlutsistaController;
+use App\Mail\SendEmail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandController;
-use App\Http\Controllers\PenggunaController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\AlutsistaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,10 +64,12 @@ Route::middleware('auth')->group(function () {
 // Route::get('/alutsista/{kode_senjata}',[LandController::class, 'show'])->name('alutsista.show');
 Route::prefix('alutsista')->group(function () {
     Route::get('/', [LandController::class, 'index'])->name('alutsista.index');
-    Route::get('/semua', [LandController::class, 'semua'])->name('alutsista.semua');
-    Route::get('/{alutsista:kode_senjata}', [LandController::class, 'show'])->name('alutsista.show');
+    Route::get('/post', [LandController::class, 'semua'])->name('alutsista.semua');
+    Route::get('/post/{alutsista:kode_senjata}', [LandController::class, 'show'])->name('alutsista.show');
     // Route::get('/semua', [LandController::class, 'jenis'])->name('alutsista.jenis');
 });
+
+Route::post('send-email', [LandController::class, 'sendEmail'])->name('send.email');
 // Route::get('/alutsista/')
 
 // Route::get('/admin/dashboard', function () {

@@ -23,7 +23,7 @@
                                 </h3>
                                 <div>
                                     <x-input-label for="nama" :value="__('Nama')" />
-                                    <x-text-input id="nama" class="block mt-1 w-full" type="text" name="nama" :value="$user->name" required autofocus autocomplete="nama" />
+                                    <x-text-input id="nama" class="block mt-1 w-full" type="text" name="nama" :value="$user->name" required autofocus autocomplete="nama" onchange=""/>
                                     <x-input-error :messages="$errors->get('nama')" class="mt-2" />
                                 </div>
                                 <div>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="w-full flex justify-end">
-                                <x-primary-button>
+                                <x-primary-button id="simpanButton" disabled>
                                     {{ _('Simpan') }}
                                 </x-primary-button>
                             </div>
@@ -66,4 +66,41 @@
         </div>
     </div>
 </div>
+<!-- ... -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Ambil referensi elemen tombol "Simpan"
+        var simpanButton = document.getElementById('simpanButton');
+
+        // Ambil referensi elemen input yang akan diawasi perubahannya
+        var namaInput = document.getElementById('nama');
+        var emailInput = document.getElementById('email');
+        var rolesInput = document.getElementById('roles');
+        var nomorIndukInput = document.getElementById('nomor_induk');
+        var nomorTlpInput = document.getElementById('nomor_tlp');
+
+        // Fungsi untuk memeriksa perubahan input dan mengaktifkan/disabled tombol "Simpan"
+        function checkChanges() {
+            // Tambahkan kondisi perubahan input yang ingin Anda awasi di sini
+            var isChanged = (
+                namaInput.value !== "{{$user->name}}" ||
+                emailInput.value !== "{{$user->email}}" ||
+                rolesInput.value !== "{{$user->roles->first()->name}}" ||
+                nomorIndukInput.value !== "{{$user->nomor_induk}}" ||
+                nomorTlpInput.value !== "{{$user->nomor_tlp}}"
+            );
+
+            // Aktifkan/disabled tombol "Simpan" berdasarkan kondisi perubahan
+            simpanButton.disabled = !isChanged;
+        }
+
+        // Tambahkan event listener untuk setiap input yang diawasi
+        namaInput.addEventListener('input', checkChanges);
+        emailInput.addEventListener('input', checkChanges);
+        rolesInput.addEventListener('change', checkChanges);
+        nomorIndukInput.addEventListener('input', checkChanges);
+        nomorTlpInput.addEventListener('input', checkChanges);
+    });
+</script>
+<!-- ... -->
 @endsection
