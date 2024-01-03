@@ -32,7 +32,7 @@ class PenggunaController extends Controller
                 'nama' => 'required',
                 'email' => 'required|email|unique:users|email:rfc,dns',
                 'roles' => 'required',
-                'nomor_induk' => 'required|unique:users',
+                'nomor_induk' => 'required|unique:users|numeric|digits_between:10,10',
                 'nomor_tlp' => 'required|numeric|unique:users|digits_between:10,13',
             ]);
 

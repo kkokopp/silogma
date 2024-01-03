@@ -38,7 +38,8 @@
                                         <label for="roles"
                                             class="block font-medium text-sm text-gray-700 dark:text-gray-300">Role</label>
                                         <select id="roles" name="roles"
-                                            class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-gray-500 dark:focus:border-gray-600 focus:ring-gray-500 dark:focus:ring-dark-600 rounded-md shadow-sm block mt-1 w-full">
+                                            class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-gray-500 dark:focus:border-gray-600 focus:ring-gray-500 dark:focus:ring-dark-600 rounded-md shadow-sm block mt-1 w-full"
+                                            @if(auth()->user()->kode_user == $user->kode_user) disabled @endif>
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->name }}"
                                                     @foreach ($user->roles as $userRole)
