@@ -47,8 +47,13 @@
             {{-- {{ dd(request()->url()) }} --}}
             <li class="relative group py-5 px-3 hover:text-white">
                 @if (Auth::check())
-                    <a href="{{ route('admin.dashboard') }}"
-                        class="bg-white py-2 px-2 rounded-md text-black hover:text-white hover:bg-slate-500">Dashboard</a>
+                    @if (Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="bg-white py-2 px-2 rounded-md text-black hover:text-white hover:bg-slate-500">Dashboard</a>
+                    @else 
+                        <a href="{{ route('user.dashboard') }}"
+                            class="bg-white py-2 px-2 rounded-md text-black hover:text-white hover:bg-slate-500">Dashboard</a>
+                    @endif
                 @else
                     <a href="{{ route('login') }}"
                         class="bg-white py-2 px-2 rounded-md text-black hover:text-white hover:bg-slate-500">Login</a>

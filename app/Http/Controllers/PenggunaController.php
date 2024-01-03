@@ -58,7 +58,7 @@ class PenggunaController extends Controller
             // dd($e->getMessage());
             return redirect()->route('admin.pengguna.tambah')->withErrors($e->validator)->withInput();
         }catch(\Exception $e){
-            // dd($e->getMessage());
+            dd($e->getMessage());
             return redirect()->route('admin.pengguna')->with('error', 'Pengguna gagal ditambahkan');
         }
     }
