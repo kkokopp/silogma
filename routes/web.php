@@ -60,14 +60,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::prefix('alutsista')->group(function () {
+        // Route::get('/', [LandController::class, 'index'])->name('alutsista.index');
+        Route::get('/post', [LandController::class, 'semua'])->name('alutsista.semua');
+        Route::get('/post/{alutsista:kode_senjata}', [LandController::class, 'show'])->name('alutsista.show');
+        // Route::get('/semua', [LandController::class, 'jenis'])->name('alutsista.jenis');
+    });
 });
-// Route::get('/alutsista/{kode_senjata}',[LandController::class, 'show'])->name('alutsista.show');
-Route::prefix('alutsista')->group(function () {
-    Route::get('/', [LandController::class, 'index'])->name('alutsista.index');
-    Route::get('/post', [LandController::class, 'semua'])->name('alutsista.semua');
-    Route::get('/post/{alutsista:kode_senjata}', [LandController::class, 'show'])->name('alutsista.show');
+// Route::prefix('alutsista')->group(function () {
+    Route::get('alutsista/', [LandController::class, 'index'])->name('alutsista.index');
+    // Route::get('alutsista/post', [LandController::class, 'semua'])->name('alutsista.semua');
+    // Route::get('/post/{alutsista:kode_senjata}', [LandController::class, 'show'])->name('alutsista.show');
     // Route::get('/semua', [LandController::class, 'jenis'])->name('alutsista.jenis');
-});
+// });
+// Route::get('/alutsista/{kode_senjata}',[LandController::class, 'show'])->name('alutsista.show');
 
 Route::post('send-email', [LandController::class, 'sendEmail'])->name('send.email');
 // Route::get('/alutsista/')

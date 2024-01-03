@@ -13,7 +13,7 @@ class PenggunaController extends Controller
     public function index()
     {
         return view('admin.pengguna.pengguna',[
-            'users' => User::with('roles')->get()
+            'users' => User::with('roles')->paginate(10)
         ]);
     }
 

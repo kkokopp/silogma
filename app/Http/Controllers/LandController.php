@@ -71,6 +71,7 @@ class LandController extends Controller
         $pesan = $request->pesan;
 
         $email = new SendEmail($nama, $email_pengguna, $pesan);
+        // $email->subject('Pesan dari ' . $nama);
 
         Mail::to('silogmamiliter@gmail.com')->send($email);
         

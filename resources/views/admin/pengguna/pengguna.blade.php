@@ -77,6 +77,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="py-5">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
     </div>
