@@ -55,7 +55,15 @@
                                     </td>
                                     @foreach ($user->roles as $role)    
                                         <td class="px-6 py-4">
-                                            {{ $role->name }}
+                                            @if($role->name == 'admin')
+                                                <a class="py-2 px-3 text-white rounded-md bg-slate-600">
+                                                    {{ $role->name }}
+                                                </a>
+                                            @else
+                                                <a class="py-2 px-3 rounded-md bg-slate-200">
+                                                    {{ $role->name }}
+                                                </a>
+                                            @endif
                                         </td>
                                     @endforeach
                                     <td class="px-6 py-4">
@@ -63,12 +71,12 @@
                                     </td>
                                     <td class="px-6 flex gap-2 py-4">
                                         {{-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
-                                        <a href="{{ route('admin.pengguna.edit', ['user' => $user->kode_user]) }}" class="font-semibold bg-blue-400 text-white border-blue-600 px-2 py-1 border-2 rounded-lg hover:bg-blue-600">Edit</a>
+                                        <a href="{{ route('admin.pengguna.edit', ['user' => $user->kode_user]) }}" class="inline-flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm border-2 border-blue-700 hover:bg-blue-400">Edit</a>
                                         {{-- <form action="{{ route('admin.pengguna.destroy', ['user' => $user->kode_user]) }}" method="POST"> --}}
                                             {{-- {{ dd($user->kode_user) }} --}}
                                             {{-- @csrf     
                                             @method('DELETE')                                        --}}
-                                        <button type="button" data-id="{{ $index }}" class="modalbtn font-semibold bg-red-400 text-white border-red-600 px-2 py-1 border-2 rounded-lg hover:bg-red-600">Delete</button>
+                                        <button type="button" data-id="{{ $index }}" class="modalbtn inline-flex justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm border-2 border-red-700 hover:bg-red-400 ">Delete</button>
                                         {{-- </form> --}}
                                         <x-modal-confirmation :kode="$user->kode_user" title=Pengguna route=admin.pengguna.destroy model=user :iteration="$index"/>
                                     </td>
